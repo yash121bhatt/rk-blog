@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Media Player with Playlist</title>
+	<style>
+		/* Add your custom styles here */
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f4f4f4;
+			text-align: center;
+			margin: 20px;
+		}
+
+		#playlist {
+			list-style: none;
+			padding: 0;
+			/* display: flex; */
+			justify-content: center;
+		}
+
+		#playlist li {
+			margin: 0 10px;
+			cursor: pointer;
+			text-decoration: none;
+		}
+
+		#audioPlayer,
+		#videoPlayer {
+			width: 100%;
+			max-width: 400px;
+			margin: 20px auto;
+		}
+	</style>
+	<!-- Include jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+<body>
+	<h1>Media Player with Playlist</h1>
+
+	<ul id="playlist"></ul>
+
+	<audio id="audioPlayer" controls>
+		Your browser does not support the audio element.
+	</audio>
+
+	<video id="videoPlayer" controls>
+		Your browser does not support the video element.
+	</video>
+
+	<script>
+		$(document).ready(function () {
+			const playlist = $('#playlist');
+			const audioPlayer = $('#audioPlayer')[0]; // Get the native audio element
+			const videoPlayer = $('#videoPlayer')[0]; // Get the native video element
+
+			const playlistItems = [
+				{ type: 'audio', source: '../cool_admin/media/Pal pal Ginke Guzara.mp3', name: 'Pal pal Ginke Guzara.mp3' },
+				{ type: 'video', source: '../cool_admin/media/Pal pal Ginke Guzara.mp4', name: 'Pal pal Ginke Guzara.mp4' }
+				// Add more media files as needed
+			];
+
+			// Create playlist items dynamically
+			$.each(playlistItems, function (index, item) {
+				const listItem = $('<li>', {
+					// text: `Media ${index + 1}`,
+					text: `${index + 1}. ${item.name}`,
+					click: function () {
+						playMedia(index);
+					}
+				});
+				playlist.append(listItem);
+			});
+
+			// Function to play media
+			function playMedia(index) {
+				const mediaItem = playlistItems[index];
+
+				// Pause the currently playing media
+				if (audioPlayer.paused === false) {
+					audioPlayer.pause();
+				}
+				if (videoPlayer.paused === false) {
+					videoPlayer.pause();
+				}
+
+				// Show the appropriate player
+				if (mediaItem.type === 'audio') {
+					audioPlayer.src = mediaItem.source;
+					audioPlayer.play();
+					audioPlayer.style.display = 'block';
+					videoPlayer.style.display = 'none';
+				} else if (mediaItem.type === 'video') {
+					videoPlayer.src = mediaItem.source;
+					videoPlayer.play();
+					videoPlayer.style.display = 'block';
+					audioPlayer.style.display = 'none';
+				}
+			}
+
+			// Event listeners for play, pause, next, and previous buttons for audio player
+			audioPlayer.addEventListener('ended', function () {
+				// Auto play the next track when the current track ends
+				playNext();
+			});
+
+			// Event listeners for play, pause, next, and previous buttons for video player
+			videoPlayer.addEventListener('ended', function () {
+				// Auto play the next video when the current video ends
+				playNext();
+			});
+
+			function playNext() {
+				const currentIndex = playlistItems.findIndex(item => item.source === (audioPlayer.src || videoPlayer.src));
+				const nextIndex = (currentIndex + 1) % playlistItems.length;
+				playMedia(nextIndex);
+			}
+
+			function playPrevious() {
+				const currentIndex = playlistItems.findIndex(item => item.source === (audioPlayer.src || videoPlayer.src));
+				const previousIndex = (currentIndex - 1 + playlistItems.length) % playlistItems.length;
+				playMedia(previousIndex);
+			}
+		});
+	</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+<%- include('layouts/head.ejs') %>
+
+<body class="animsition">
+	<div class="page-wrapper">
+		<!-- HEADER MOBILE-->
+		<%- include('layouts/header_mobile.ejs') %>
+		<!-- END HEADER MOBILE-->
+
+		<!-- MENU SIDEBAR-->
+		<%- include('layouts/asidebar.ejs') %>
+		<!-- END MENU SIDEBAR-->
+
+		<!-- PAGE CONTAINER-->
+		<div class="page-container">
+			<!-- HEADER DESKTOP-->
+			<%- include('layouts/header_desktop.ejs') %>
+			<!-- HEADER DESKTOP-->
+
+			<!-- MAIN CONTENT-->
+			<div class="main-content">
+				<div class="section__content section__content--p30">
+					<div class="container-fluid">
+						<!-- Alert Message -->
+						<br>
+						<%- include('layouts/alert.ejs') %>
+						<br>
+						<!-- /Alert Message -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="overview-wrap">
+									<h2 class="title-1">overview</h2>
+									<button class="au-btn au-btn-icon au-btn--blue" data-toggle="modal" data-target="#addUserModal">
+										<i class="zmdi zmdi-plus"></i>add user</button>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<h2 class="title-1 m-b-25"></h2>
+								<div class="table-responsive table--no-card m-b-40">
+									<table class="table table-borderless table-striped table-earning">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Name</th>
+												<th>Email</th>
+												<th>Role</th>
+												<th>Status</th>
+												<th class="text-center">Profile Image</th>
+												<th>Created At</th>
+												<th>Updated At</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<% if (data.length > 0) { %>
+												<% data.forEach((item, index)=> { %>
+													<style>
+														td {
+															vertical-align: middle !important;
+														}
+													</style>
+													<tr>
+														<td>
+															<%= index + 1 %>
+														</td>
+														<td>
+															<%= item.name %>
+														</td>
+														<td>
+															<%= item.email %>
+														</td>
+														<td>
+															<% if (item.role == 'Admin' ) { %>
+																<span class="btn btn-sm bg-danger text-white">
+																	<%= item.role %>
+																</span>
+															<% } else if (item.role == 'User' ) { %>
+																<span class="btn btn-sm bg-info text-white">
+																	<%= item.role %>
+																</span>
+															<% } else if (item.role == 'Author' ) { %>
+																<span class="btn btn-sm bg-success text-white">
+																	<%= item.role %>
+																</span>
+															<% } %>
+														</td>
+														<td>
+															<% if (item.status == 'Active') { %>
+																<span class="btn btn-sm bg-success text-white"><%= item.status %></span>
+															<% } else if (item.status == 'Inactive') { %>
+																<span class="btn btn-sm bg-warning text-white"><%= item.status %></span>
+															<% } else if (item.status == 'Block') { %>
+																<span class="btn btn-sm bg-danger text-white"><%= item.status %></span>
+															<% } %>
+														</td>
+														<td class="text-center">
+															<% if (item.profileImage.url) { %>
+																<img src="<%= item.profileImage.url %>" alt="<%= item.name %>">
+															<% } else { %>
+																<img src="../cool_admin/images/dummy_profile_image.png" alt="<%= item.name %>">
+															<% } %>
+														</td>
+														<td>
+															<%= item.createdAt %>
+														</td>
+														<td>
+															<%= item.updatedAt %>
+														</td>
+														<td>
+															<button data-toggle="modal" data-target="#viewUserModal" data-id="<%= item.id %>" onclick="openViewModal(JSON.stringify(<%= JSON.stringify(item) %>))"><i class="fa fa-eye text-warning"></i></button>
+															<!-- <a href="/admin/user/edit/<%= item.id %>"><i class="fa fa-pencil-square-o text-success"></i></a> -->
+															<!-- <a href="/admin/user/delete/<%= item.id %>"><i class="fa fa-trash text-danger"></i></a> -->
+															<button data-toggle="modal" data-target="#editUserModal" onclick="openEditModal(JSON.stringify(<%= JSON.stringify(item) %>))"><i class="fa fa-pencil-square-o text-success"></i></button>
+															<button data-toggle="modal" data-target="#deleteUserModal"><i class="fa fa-trash text-danger"></i></button>
+														</td>
+													</tr>
+													<% }) %>
+											<% } else { %>
+												<tr>
+													<td colspan="9" rowspan="2" align="center">No Records</td>
+												</tr>
+											<% } %>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<!-- Copyright -->
+						<%- include('layouts/copyright.ejs') %>
+						<!-- /Copyright -->
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT-->
+			<!-- END PAGE CONTAINER-->
+		</div>
+
+		<!-- modal scroll -->
+		<%- include('layouts/user_add_modal.ejs') %>
+		<%- include('layouts/user_view_modal.ejs') %>
+		<%- include('layouts/user_edit_modal.ejs') %>
+		<%- include('layouts/user_delete_modal.ejs') %>
+		<!-- end modal scroll -->
+
+	</div>
+
+	<%- include('layouts/scripts.ejs') %>
+
+</body>
+
+</html>
+<!-- end document-->

@@ -1,0 +1,137 @@
+<%- include('layouts/head.ejs') %>
+
+<body class="animsition">
+	<div class="page-wrapper">
+		<!-- HEADER MOBILE-->
+		<%- include('layouts/header_mobile.ejs') %>
+		<!-- END HEADER MOBILE-->
+
+		<!-- MENU SIDEBAR-->
+		<%- include('layouts/asidebar.ejs') %>
+		<!-- END MENU SIDEBAR-->
+
+		<!-- PAGE CONTAINER-->
+		<div class="page-container">
+			<!-- HEADER DESKTOP-->
+			<%- include('layouts/header_desktop.ejs') %>
+			<!-- HEADER DESKTOP-->
+
+			<!-- MAIN CONTENT-->
+			<div class="main-content">
+				<div class="section__content section__content--p30">
+					<div class="container-fluid">
+						<!-- Alert Message -->
+						<br>
+						<%- include('layouts/alert.ejs') %>
+						<br>
+						<!-- /Alert Message -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="overview-wrap">
+									<h2 class="title-1">overview</h2>
+									<button class="au-btn au-btn-icon au-btn--blue" data-toggle="modal" data-target="#addUserModal">
+										<i class="zmdi zmdi-plus"></i>add user</button>
+								</div>
+							</div>
+						</div>
+						<div class="row m-t-25">
+							<div class="col-sm-6 col-lg-3">
+								<div class="overview-item overview-item--c1">
+									<div class="overview__inner">
+										<div class="overview-box clearfix">
+											<div class="icon">
+												<!-- <i class="zmdi zmdi-account-o"></i> -->
+												<i class="fa fa-users"></i>
+											</div>
+											<div class="text">
+												<h2><%= allUsersCount %></h2>
+												<span>All Users</span>
+											</div>
+										</div>
+										<div class="overview-chart">
+											<canvas id="widgetChart1"></canvas>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 col-lg-3">
+								<div class="overview-item overview-item--c2">
+									<div class="overview__inner">
+										<div class="overview-box clearfix">
+											<div class="icon">
+												<!-- <i class="zmdi zmdi-shopping-cart"></i> -->
+												<i class="fa fa-globe"></i>
+											</div>
+											<div class="text">
+												<h2>0</h2>
+												<span>Online Users</span>
+											</div>
+										</div>
+										<div class="overview-chart">
+											<canvas id="widgetChart2"></canvas>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 col-lg-3">
+								<div class="overview-item overview-item--c3">
+									<div class="overview__inner">
+										<div class="overview-box clearfix">
+											<div class="icon">
+												<i class="zmdi zmdi-calendar-note"></i>
+											</div>
+											<div class="text">
+												<h2>0</h2>
+												<span>All Blogs</span>
+											</div>
+										</div>
+										<div class="overview-chart">
+											<canvas id="widgetChart3"></canvas>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 col-lg-3">
+								<div class="overview-item overview-item--c4">
+									<div class="overview__inner">
+										<div class="overview-box clearfix">
+											<div class="icon">
+												<i class="zmdi zmdi-money"></i>
+											</div>
+											<div class="text">
+												<h2>$0</h2>
+												<span>total earnings</span>
+											</div>
+										</div>
+										<div class="overview-chart">
+											<canvas id="widgetChart4"></canvas>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Copyright -->
+						<%- include('layouts/copyright.ejs') %>
+						<!-- /Copyright -->
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT-->
+			<!-- END PAGE CONTAINER-->
+		</div>
+
+		<!-- modal scroll -->
+		<%- include('layouts/user_add_modal.ejs') %>
+		<%- include('layouts/user_view_modal.ejs') %>
+		<%- include('layouts/user_edit_modal.ejs') %>
+		<%- include('layouts/user_delete_modal.ejs') %>
+		<!-- end modal scroll -->
+
+	</div>
+
+	<%- include('layouts/scripts.ejs') %>
+
+</body>
+
+</html>
+<!-- end document-->

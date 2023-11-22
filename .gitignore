@@ -1,0 +1,7 @@
+/public/admin_lte_v3
+/node_modules
+/logs
+.env-dev
+.env-prod
+extra.js
+pakage-lock.json
