@@ -14,7 +14,7 @@ const api = require('./routes/api')
 const port = process.env.PORT || 8000
 
 // View Engine
-app.set('view engine', 'EJS')
+app.set('view engine', 'ejs')
 
 // Helper function to make environment variables accessible in EJS files
 app.locals.env = process.env
